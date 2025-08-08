@@ -1,0 +1,108 @@
+.terminal-window {
+    background-color: #211e1e;
+    color: #fff;
+    width: 800px;
+    margin: 40px auto;
+    font-family: Consolas, monospace;
+    border: 1px solid #333;
+    overflow: hidden;
+}
+
+.terminal-title-bar {
+    height: 30px;
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #444;
+    user-select: none;
+}
+
+.title-icon {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.window-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.minimize {
+    background-color: #fdbc40;
+}
+
+.maximize {
+    background-color: #34c84a;
+}
+
+.close {
+    background-color: #fc6058;
+}
+
+.terminal-tabs {
+    height: 30px;
+    background-color: #252526;
+    border-bottom: 1px solid #333;
+    font-size: 14px;
+}
+
+.tab {
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.tab.selected {
+    background-color: #1e1e1e;
+    border-bottom: 2px solid #00aaff;
+}
+
+.terminal-body {
+    height: 500px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.terminal-input {
+    background: none;
+    border: none;
+    color: white;
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    caret-color: white;
+}
+
+.resizer {
+    position: absolute;
+    z-index: 10;
+}
+
+.resizer-br {
+    width: 12px;
+    height: 12px;
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
+}
+
+.resizer-r {
+    width: 8px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    cursor: e-resize;
+}
+
+.resizer-b {
+    height: 8px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: s-resize;
+}
