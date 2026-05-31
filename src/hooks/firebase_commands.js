@@ -116,4 +116,21 @@ async function getResumePdfUrl() {
     return null;
 }
 
-export { getCollectionData, uploadNewResume, getResume, uploadResumePDF, getResumePdfUrl, auth, signIn, signOutUser };
+async function logVisit() {
+    try {
+        await addDoc(collection(db, "visitors"), {
+            timestamp: Timestamp.fromDate(new Date()),
+            page: window.location.hash || "/",
+            referrer: document.referrer || null,
+            userAgent: navigator.userAgent,
+            language: navigator.language,
+            screen: `${window.screen.width}x${window.screen.height}`,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        });
+    } catch (err) {
+        // non-blocking — silently ignore
+        console.debug("Visit log failed:", err);
+    }
+}
+
+export { getCollectionData, uploadNewResume, getResume, uploadResumePDF, getResumePdfUrl, logVisit, auth, signIn, signOutUser };
