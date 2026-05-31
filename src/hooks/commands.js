@@ -8,32 +8,32 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
         // Essential portfolio actions (quick access)
         case "resume":
         case "cv":
-            window.open("/resume", "_blank");
+            window.open("/#/resume", "_blank");
             return [
-                "📄 Opening resume in new tab...",
+                "Opening resume in new tab...",
                 "Resume loaded successfully!"
             ];
 
         // Quick contact info
         case "contact":
             return [
-                "📧 thulanegulube@gmail.com",
-                "📱 +27637251905",
-                "📍 Johannesburg, South Africa",
+                "  Email     thulanegulube@gmail.com",
+                "  Phone     +27637251905",
+                "  Location  Johannesburg, South Africa",
                 "",
-                "💡 Try: 'assistant tell me more about Thulani' for detailed info"
+                "  Tip: 'assistant tell me more about Thulani' for detailed info"
             ];
 
         // Quick links
         case "links":
         case "social":
             return [
-                "🔗 Quick Links:",
-                "GitHub: github.com/thulani-dev",
-                "LinkedIn: linkedin.com/in/thulani-gulube", 
-                "Blog: thulani-dev.com/blog",
+                "Quick Links:",
+                "  GitHub    github.com/thulani-dev",
+                "  LinkedIn  linkedin.com/in/thulani-gulube",
+                "  Blog      thulani-dev.com/blog",
                 "",
-                "💡 Try: 'assistant what are Thulani's recent projects?'"
+                "  Tip: 'assistant what are Thulani\'s recent projects?'"
             ];
 
         // Windows system commands (for authenticity)
@@ -70,8 +70,8 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
             return [
                 "Microsoft Windows [Version 10.0.22621.2134]",
                 "",
-                "💻 Portfolio Terminal v3.0 - AI Enhanced",
-                "🤖 Assistant integration active"
+                "  Portfolio Terminal v3.0 - AI Enhanced",
+                "  AI Assistant integration active"
             ];
 
         case "ipconfig":
@@ -82,7 +82,7 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
                 "   IPv4 Address. . . . . . . . . . . : 192.168.1.100",
                 "   Default Gateway . . . . . . . . . : 192.168.1.1",
                 "",
-                "🌐 Portfolio accessible worldwide!"
+                "  Portfolio accessible worldwide!"
             ];
 
         // Help system - guide users to AI assistant
@@ -93,12 +93,12 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
                 "║                    PORTFOLIO TERMINAL HELP                  ║",
                 "╚══════════════════════════════════════════════════════════════╝",
                 "",
-                "🚀 Quick Commands:",
+                "Quick Commands:",
                 "   resume       Open my resume/CV",
                 "   contact      Get contact information",
                 "   links        View social media profiles",
                 "",
-                "🤖 AI Assistant (Recommended):",
+                "AI Assistant (Recommended):",
                 "   assistant <question>    Ask anything about me!",
                 "",
                 "Examples:",
@@ -107,10 +107,10 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
                 "   assistant what technologies do you use?",
                 "   assistant tell me about your background",
                 "",
-                "💻 System Commands:",
+                "System Commands:",
                 "   dir, cls, date, time, ver, ipconfig",
                 "",
-                "💡 Tip: The AI assistant provides much richer responses",
+                "  Tip: The AI assistant provides much richer responses",
                 "    than static commands. Try asking it anything!"
             ];
 
@@ -121,7 +121,7 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
         case "experience":
         case "background":
             return [
-                `💡 For detailed information about '${command}', try:`,
+                `  For detailed information about '${command}', try:`,
                 "",
                 `   assistant tell me about Thulani's ${command}`,
                 "",
@@ -134,12 +134,12 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
         case "exit":
         case "quit":
             return [
-                "Thanks for visiting my portfolio! 🚀",
+                "Thanks for visiting my portfolio!",
                 "",
-                "💡 Before you go, try asking the assistant:",
+                "  Before you go, try asking the assistant:",
                 "   assistant what makes Thulani unique as a developer?",
                 "",
-                "Hope to connect with you soon! 👋"
+                "Hope to connect with you soon!"
             ];
 
         case "":
@@ -149,17 +149,17 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
         case "hello":
         case "hi":
             return [
-                "Hello! 👋 Welcome to my interactive portfolio!",
+                "Welcome to my interactive portfolio!",
                 "",
-                "💡 Try: 'assistant introduce yourself' for a personal greeting",
+                "  Try: 'assistant introduce yourself' for a personal greeting",
                 "Or: 'help' to see what you can explore"
             ];
 
         case "coffee":
             return [
-                "☕ Error: Coffee machine not connected to terminal",
+                "Error: Coffee machine not connected to terminal",
                 "",
-                "💡 Try: 'assistant how much coffee do you drink?' 😄"
+                "  Try: 'assistant how much coffee do you drink?'"
             ];
 
         // Default - guide to assistant
@@ -168,7 +168,7 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
             if (fullCommand.includes('?') || fullCommand.includes('how') || fullCommand.includes('what') || 
                 fullCommand.includes('tell') || fullCommand.includes('show') || fullCommand.length > 15) {
                 return [
-                    "💡 That sounds like a question for the AI assistant!",
+                    "  That sounds like a question for the AI assistant!",
                     "",
                     `Try: assistant ${fullCommand}`,
                     "",
@@ -180,7 +180,7 @@ export function runCommand(cmd, currentDirectory = "C:\\Users\\Thulani") {
             return [
                 `'${fullCommand}' is not recognized as an internal or external command.`,
                 "",
-                "💡 Try 'help' for available commands, or ask the assistant:",
+                "  Try 'help' for available commands, or ask the assistant:",
                 `   assistant ${fullCommand}`,
                 "",
                 "Quick commands: resume | contact | links | help"

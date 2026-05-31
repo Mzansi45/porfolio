@@ -1,0 +1,183 @@
+/* Tailwind utilities only — no preflight, preserves Bootstrap for Terminal */
+@import "tailwindcss/utilities";
+@import "tailwindcss/theme" layer(theme);
+
+/* pf-switch-hint used in Terminal.jsx */
+.pf-switch-hint {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: rgba(15,15,15,0.9);
+  color: #555;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  z-index: 50;
+  transition: color 0.2s;
+}
+.pf-switch-hint:hover { color: #ccc; }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.cursor-blink { animation: blink 1s step-start infinite; }
+
+@keyframes pa-ping { 75%,100%{ transform:scale(2); opacity:0; } }
+.pa-ping { animation: pa-ping 2s cubic-bezier(0,0,0.2,1) infinite; }
+
+/* ── Design tokens ────────────────────────────────────────────────────────── */
+:root {
+  --pf-bg:        #ffffff;
+  --pf-surface:   #fafafa;
+  --pf-border:    #f0f0f0;
+  --pf-border-md: #e0e0e0;
+  --pf-text:      #111111;
+  --pf-text-2:    #555555;
+  --pf-text-3:    #999999;
+  --pf-text-4:    #bbbbbb;
+  --pf-accent:    #111111;
+  --pf-accent-fg: #ffffff;
+  --pf-tag-bg:    #f5f5f5;
+  --pf-tag-bd:    #ebebeb;
+  --pf-font:      'Inter', system-ui, sans-serif;
+  --pf-mono:      'JetBrains Mono', 'Fira Code', monospace;
+}
+
+[data-theme="dark"] {
+  --pf-bg:        #0d0d0d;
+  --pf-surface:   #161616;
+  --pf-border:    #222222;
+  --pf-border-md: #2e2e2e;
+  --pf-text:      #f5f5f5;
+  --pf-text-2:    #aaaaaa;
+  --pf-text-3:    #666666;
+  --pf-text-4:    #444444;
+  --pf-accent:    #f5f5f5;
+  --pf-accent-fg: #0d0d0d;
+  --pf-tag-bg:    #1e1e1e;
+  --pf-tag-bd:    #2a2a2a;
+}
+
+/* ── Smooth scroll + font ─────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+/* Apply Inter to the portfolio shell only */
+.pf-root {
+  font-family: var(--pf-font);
+  background-color: var(--pf-bg);
+  color: var(--pf-text);
+  transition: background-color 0.25s, color 0.25s;
+}
+
+/* ── Dark-mode surface overrides for inline-bg classes ───────────────────── */
+[data-theme="dark"] .pf-root .bg-white       { background-color: var(--pf-bg) !important; }
+[data-theme="dark"] .pf-root .bg-\[#fafafa\] { background-color: var(--pf-surface) !important; }
+[data-theme="dark"] .pf-root .bg-\[#f5f5f5\] { background-color: #1e1e1e !important; }
+[data-theme="dark"] .pf-root .border-\[#f0f0f0\] { border-color: var(--pf-border) !important; }
+[data-theme="dark"] .pf-root .border-\[#e0e0e0\],
+[data-theme="dark"] .pf-root .border-\[#e8e8e8\],
+[data-theme="dark"] .pf-root .border-\[#ebebeb\] { border-color: var(--pf-border-md) !important; }
+
+/* Text overrides in dark */
+[data-theme="dark"] .pf-root .text-\[#111\],
+[data-theme="dark"] .pf-root .text-\[#222\],
+[data-theme="dark"] .pf-root .text-\[#333\]  { color: var(--pf-text) !important; }
+[data-theme="dark"] .pf-root .text-\[#555\],
+[data-theme="dark"] .pf-root .text-\[#777\]  { color: var(--pf-text-2) !important; }
+[data-theme="dark"] .pf-root .text-\[#999\],
+[data-theme="dark"] .pf-root .text-\[#aaa\],
+[data-theme="dark"] .pf-root .text-\[#bbb\],
+[data-theme="dark"] .pf-root .text-\[#ccc\],
+[data-theme="dark"] .pf-root .text-\[#ddd\]  { color: var(--pf-text-3) !important; }
+
+/* Tag pill backgrounds in dark */
+[data-theme="dark"] .pf-root .bg-\[#f5f5f5\] { background-color: var(--pf-tag-bg) !important; }
+
+/* Primary button in dark */
+[data-theme="dark"] .pf-root .bg-\[#111\],
+[data-theme="dark"] .pf-root .hover\:bg-black:hover { background-color: #f5f5f5 !important; color: #0d0d0d !important; }
+
+/* Input bg in dark */
+[data-theme="dark"] .pf-root input,
+[data-theme="dark"] .pf-root textarea {
+  background-color: var(--pf-surface) !important;
+  color: var(--pf-text) !important;
+  border-color: var(--pf-border-md) !important;
+}
+
+/* ── Hero gradient accent ─────────────────────────────────────────────────── */
+.pf-hero-name {
+  background: linear-gradient(135deg, var(--pf-text) 0%, #555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+[data-theme="dark"] .pf-hero-name {
+  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* ── Accent dot on section labels ────────────────────────────────────────── */
+.pf-section-label::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10b981;
+  margin-right: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+/* ── Focus-visible ring ──────────────────────────────────────────────────── */
+.pf-root *:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* ── Skip link ───────────────────────────────────────────────────────────── */
+.pf-skip {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  z-index: 9999;
+  background: var(--pf-text);
+  color: var(--pf-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-family: var(--pf-font);
+  text-decoration: none;
+}
+.pf-skip:focus { top: 1rem; }
+
+/* ── PA chat ping ────────────────────────────────────────────────────────── */
+.pf-switch-hint {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: rgba(15,15,15,0.9);
+  color: #555;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  z-index: 50;
+  transition: color 0.2s;
+}
+.pf-switch-hint:hover { color: #ccc; }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.cursor-blink { animation: blink 1s step-start infinite; }
+
+@keyframes pa-ping { 75%,100%{ transform:scale(2); opacity:0; } }
+.pa-ping { animation: pa-ping 2s cubic-bezier(0,0,0.2,1) infinite; }
+
+/* ── Monospace font for PA footer link ───────────────────────────────────── */
+.pf-mono { font-family: var(--pf-mono); }

@@ -1,10 +1,8 @@
 // firebase.js
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getFirestore, doc, collection, getDocs, setDoc, updateDoc, where, Timestamp, addDoc } from "firebase/firestore";
-import { Groq } from 'groq-sdk';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, doc, collection, getDocs, setDoc, Timestamp, addDoc } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -23,6 +21,18 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firestore
 const db = getFirestore(app, "profile");
+
+// Initialize Auth
+const auth = getAuth(app);
+
+
+async function signIn(email, password) {
+    return signInWithEmailAndPassword(auth, email, password);
+}
+
+async function signOutUser() {
+    return signOut(auth);
+}
 
 
 // === Helper to get full collection ===
@@ -83,4 +93,27 @@ async function getResume() {
     return resume;
 }
 
-export { getCollectionData, uploadNewResume, getResume };
+async function uploadResumePDF(file) {
+    // Convert PDF to base64 and store directly in Firestore
+    const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(",")[1]); // strip data:...;base64,
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+    const currentResumeRef = doc(db, "resume", "current_resume");
+    await setDoc(currentResumeRef, { pdf_base64: base64, pdf_name: file.name, pdf_updated: new Date().toISOString() }, { merge: true });
+}
+
+async function getResumePdfUrl() {
+    const resumeSnapshot = await getDocs(collection(db, "resume"));
+    for (const d of resumeSnapshot.docs) {
+        if (d.id === "current_resume") {
+            const base64 = d.data()?.pdf_base64;
+            if (base64) return base64;
+        }
+    }
+    return null;
+}
+
+export { getCollectionData, uploadNewResume, getResume, uploadResumePDF, getResumePdfUrl, auth, signIn, signOutUser };
